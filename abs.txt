@@ -1,0 +1,21 @@
+abstract class Employee(val name: String,val experience: Int){
+    var age:Int=0;
+    abstract var salary: Double
+    abstract fun DOB(date:String)
+    fun printDetails() {
+        println("Name: $name")
+        println("Experience: $experience years")
+        println("Salary: $salary")
+    }
+}
+class Engineer(name: String,experience: Int) : Employee(name,experience) {
+    override var salary=50000.00
+    override fun DOB(date:String){
+        println("DOB:$date")
+    }
+}
+fun main(){
+    val eng=Engineer("Sam",99)
+    eng.printDetails()
+    eng.DOB("13 May 2003")
+}

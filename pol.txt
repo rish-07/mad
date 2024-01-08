@@ -1,0 +1,25 @@
+import java.util.*
+
+interface Shape {
+    fun area(): Double
+}
+
+class Circle(private val radius: Double) : Shape {
+    override fun area(): Double {
+        return Math.PI * radius * radius
+    }
+}
+
+class Rectangle(private val length: Double, private val breadth: Double) : Shape {
+    override fun area(): Double {
+        return length * breadth
+    }
+}
+
+fun main() {
+    val cir = Circle(5.5)
+    println("Circle Area: ${cir.area()}")
+
+    val rec = Rectangle(2.5, 3.5)
+    println("Rectangle Area: ${rec.area()}")
+}

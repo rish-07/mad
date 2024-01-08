@@ -1,0 +1,185 @@
+import java.text.SimpleDateFormat
+import java.util.*
+
+open class Person(
+    val name: String,
+    val dob: Date,
+    val bloodGroup: String,
+    val placeOfBirth: String,
+    val aadhar: Long,
+    val pan: String,
+    val identificationMark1: String,
+    val identificationMark2: String,
+    var email: String,
+    var mobile: Long,
+    val houseNumber: String,
+    val street: String,
+    val colony: String,
+    val city: String,
+    val state: String,
+    val country: String,
+    val pin: Int
+) {
+
+    fun getAge(): Int {
+        val today = Calendar.getInstance()
+        val birthdate = Calendar.getInstance()
+        birthdate.time = dob
+        var age = today.get(Calendar.YEAR) - birthdate.get(Calendar.YEAR)
+        if (today.get(Calendar.DAY_OF_YEAR) < birthdate.get(Calendar.DAY_OF_YEAR)) {
+            age--
+        }
+        return age
+    }
+
+    fun getAddress(): String {
+        return "$houseNumber, $street, $colony, $city, $state, $country, $pin"
+    }
+
+    fun getIdentity(): String {
+        return "$identificationMark1, $identificationMark2, $pan, $aadhar"
+    }
+
+    fun setemail(email: String) {
+        this.email = email
+    }
+
+    fun setmobile(mobile: Long) {
+        this.mobile = mobile
+    }
+}
+
+// Child class
+class Student(
+    name: String,
+    dob: Date,
+    bloodGroup: String,
+    placeOfBirth: String,
+    aadhar: Long,
+    pan: String,
+    identificationMark1: String,
+    identificationMark2: String,
+    email: String,
+    mobile: Long,
+    houseNumber: String,
+    street: String,
+    colony: String,
+    city: String,
+    state: String,
+    country: String,
+    pin: Int,
+    val rollNo: Int,
+    val doj: Date,
+    val branch: String,
+    var attendancePer: Double,
+    var credits: Int
+) : Person(
+    name,
+    dob,
+    bloodGroup,
+    placeOfBirth,
+    aadhar,
+    pan,
+    identificationMark1,
+    identificationMark2,
+    email,
+    mobile,
+    houseNumber,
+    street,
+    colony,
+    city,
+    state,
+    country,
+    pin
+) {
+
+    // Remove the duplicate property
+    // val rollNo: Int,
+
+    var attendance: Int = 0
+
+    fun updateAttendance(attendance: Int) {
+        this.attendance = attendance
+        // Update the attendance percentage of the student.
+    }
+
+    fun updateCredits(credits: Int) {
+        this.credits = credits
+        // Update the number of credits earned by the student.
+    }
+}
+
+fun main() {
+    val dobFormat = SimpleDateFormat("dd-MM-yyyy")
+    val dob = dobFormat.parse("01-01-1990")
+    val person = Person(
+        "John",
+        dob,
+        "O+",
+        "New York",
+        12345678765432L,
+        "sdt1534",
+        "mole on rh",
+        "mole on rl",
+        "john@gmail.com",
+        976534588L,
+        "2-2-2917K",
+        "1st street",
+        "dd colony",
+        "hyderabad",
+        "telangana",
+        "India",
+        203983
+    )
+
+    val student = Student(
+        "John",
+        dob,
+        "O+",
+        "New York",
+        12345678765432L,
+        "sdt1534",
+        "mole on rh",
+        "mole on rl",
+        "john@gmail.com",
+        976534588L,
+        "2-2-2917K",
+        "1st street",
+        "dd colony",
+        "hyderabad",
+        "telangana",
+        "India",
+        203983,
+        123,
+        dob,
+        "Computer Science",
+        90.5,
+        120
+    )
+
+    println("Name: ${person.name}")
+    println("Age: ${person.getAge()} years")
+    println("Blood Group: ${person.bloodGroup}")
+    println("Place of Birth: ${person.placeOfBirth}")
+    println("Identity: ${person.getIdentity()}")
+    person.setemail("john123@gmail.com")
+    person.setmobile(98765432123L)
+    println("Email: ${person.email}")
+    println("Mobile: ${person.mobile}")
+    println("Address: ${person.getAddress()}")
+
+    println("\nStudent Details:")
+    println("Name: ${student.name}")
+    println("Age: ${student.getAge()} years")
+    println("Blood Group: ${student.bloodGroup}")
+    println("Place of Birth: ${student.placeOfBirth}")
+    println("Identity: ${student.getIdentity()}")
+    student.setemail("john.student@gmail.com")
+    student.setmobile(98765432123L)
+    println("Email: ${student.email}")
+    println("Mobile: ${student.mobile}")
+    println("Address: ${student.getAddress()}")
+    println("Roll No: ${student.rollNo}")
+    println("Attendance Percentage: ${student.attendancePer}%")
+    println("Credits Earned: ${student.credits}")
+}

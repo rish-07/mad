@@ -1,0 +1,79 @@
+import java.text.SimpleDateFormat
+import java.util.*
+import java.lang.*
+class Person(
+    val name: String,
+    val dob: Date,
+    val bloodGroup: String,
+    val placeOfBirth: String,
+    val aadhar: Long,
+    val pan: String,
+    val identificationMark1: String,
+    val identificationMark2: String,
+    var email: String,
+    var mobile: Long,
+    val houseNumber: String,
+    val street: String,
+    val colony: String,
+    val city: String,
+    val state: String,
+    val country: String,
+    val pin: Int
+) {
+
+    fun getAge(): Int {
+        val today = Calendar.getInstance()
+        val birthdate = Calendar.getInstance()
+        birthdate.time = dob
+        var age = today.get(Calendar.YEAR) - birthdate.get(Calendar.YEAR)
+        if (today.get(Calendar.DAY_OF_YEAR) < birthdate.get(Calendar.DAY_OF_YEAR)) {
+            age--
+        }
+        return age
+    }
+
+    fun getAddress(): String {
+        return "$houseNumber, $street, $colony, $city, $state, $country, $pin"
+    }
+
+    fun getIdentity(): String {
+        return "$identificationMark1, $identificationMark2, $pan, $aadhar"
+    }
+    fun setemail(email:String){
+        this.email=email
+    }
+}
+
+fun main() {
+    val dobFormat = SimpleDateFormat("dd-MM-yyyy")
+    val dob = dobFormat.parse("01-01-1990")
+    val person = Person(
+        "John",
+        dob,
+        "O+",
+        "New York",
+        12345678765432L,
+        "sdt1534",
+        "mole on rh",
+        "mole on rl",
+        "john@gmail.com",
+        976534588L,
+        "2-2-2917K",
+        "1st street",
+        "dd colony",
+        "hyderabad",
+        "telangana",
+        "India",
+        203983
+    )
+
+    println("Name: ${person.name}")
+    println("Age: ${person.getAge()} years")
+    println("Blood Group: ${person.bloodGroup}")
+    println("Place of Birth: ${person.placeOfBirth}")
+    println("Identity: ${person.getIdentity()}")
+    person.setemail("jhon123@gmail.com")
+    println("Email:${person.email}")
+    println("Mobile: ${person.mobile}")
+    println("Address: ${person.getAddress()}")
+}
